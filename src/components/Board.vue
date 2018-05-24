@@ -1,11 +1,11 @@
 <template>
 	<div class="board-container">
 		<table class="grid">
-			<tr class="tile" v-for="n in grid" :key="n">
+			<tr class="tile" v-for="(n, index) in grid" :key="index">
 				<td v-for="index in n" :key="index"></td>
 			</tr>
 		</table>
-		<button type="submit" v-on:keyup="move">Commencer</button>
+		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
 	</div>
 </template>
 
@@ -24,16 +24,12 @@ export default {
 	},
 	created() {
 		board.init(this.gridSize);
-		// this.grid = board.squares;
 		for (var i = 0; i < this.line; i++) {
-			// debugger;
 			this.grid[i] = [];
 			for (var j = 0; j < this.line; j++) {
 				this.grid[i][j] = i + j;
-				console.log(this.grid);
 			}
 		}
-		// console.log(this.grid);
 	},
 	methods: {
 		move(event) {
@@ -46,15 +42,37 @@ export default {
 
 <style>
 
+.board-container{
+	position: absolute;
+	left: 40%;
+}
+
 .grid {
 	width: 400px;
 	height: 400px;
-	background: purple;
-}	
+	background: #4527A0;
+}
+
 .tile {
 	width: 40px;
 	height: 40px;
-	background: red;
+	background: #B2EBF2;
 }
+
+.begin-button{
+	margin-top: 2%;
+	height: 40px;
+	width: 100px;
+	background: #fff;
+	border: 1px solid #676767;
+	border-radius: 2px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #676767;
+}
+.begin-button:hover{
+	color: #4527A0;
+}
+
 
 </style>
