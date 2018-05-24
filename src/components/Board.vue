@@ -19,21 +19,37 @@ export default {
 		return {
 			grid: [],
 			gridSize: 16,
-			line: 4
+			line: 4 // also column
 		}
 	},
 	created() {
 		board.init(this.gridSize);
-		for (var i = 0; i < this.line; i++) {
-			this.grid[i] = [];
-			for (var j = 0; j < this.line; j++) {
-				this.grid[i][j] = i + j;
-			}
-		}
+		this.initGrid();
 	},
 	methods: {
+		initGrid() {
+			for (var i = 0; i < this.line; i++) {
+				this.grid[i] = [];
+				for (var j = 0; j < this.line; j++) {
+					this.grid[i][j] = i + j;
+				}
+			}
+		},
 		move(event) {
-			board.move(event.key);
+			switch(event.key) {
+				case 'ArrowUp':
+					board.move('up');
+					break;
+				case 'ArrowDown':
+					board.move('down');
+					break;
+				case 'ArrowLeft':
+					board.move('left');
+					break;
+				case 'ArrowRight':
+					board.move('right');
+					break;
+			}
 		}
 	}
 }
