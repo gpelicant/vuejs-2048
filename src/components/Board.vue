@@ -16,6 +16,7 @@
 			</tr>
 		</table>
 		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
+		<button class="refresh-button" type="submit" v-on:click="refresh">Reinitialiser</button>
 	</div>
 </template>
 
@@ -55,6 +56,10 @@ export default {
 
 			store.commit('setGrid', this.grid);
 			this.$forceUpdate()
+		},
+		refresh(){
+			board.init(this.gridSize);
+			this.grid = board.squares;
 		}
 	}
 }
@@ -98,7 +103,7 @@ export default {
 	height: 100px;
 }
 
-.begin-button {
+.begin-button, .refresh-button {
 	margin-top: 2%;
 	height: 40px;
 	width: 100px;
