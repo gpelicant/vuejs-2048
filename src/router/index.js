@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Board from '@/board/components/Board'
+import Board from '@/components/Board'
 
 Vue.use(Router)
 

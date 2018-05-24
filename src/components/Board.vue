@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Board from '@/board/board';
+import Board from '@/utils/board';
 
 export default {
 	name: 'Board',
