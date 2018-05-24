@@ -151,8 +151,8 @@ class Board {
   }
   addSquaresIfNeeded (x1, y1, x2, y2) {
     if (this.squares[x1][y1] === this.squares[x2][y2]) {
-        this.stack.push('ADD', x1, y1, x2, y2)
-        return true
+      this.stack.push('ADD', x1, y1, x2, y2)
+      return true
     }
     return false
   }

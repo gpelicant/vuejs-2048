@@ -3,8 +3,14 @@
 		<table class="grid">
 			<tr class="tile" v-for="(x, index) in grid" :key="index" :index="index">
 				<td class="line" v-for="(y, index) in x" :key="index" :index="index">
-					<div class="tile-container" v-if="y != 0">
-						<div class="number">{{ y }}</div>
+					<div class="tile-container" v-if="y != 0"
+						v-bind:style="{backgroundColor: y === 2 || y === 4 ? '#FFC107' 
+							: y === 8 || y === 16 ? '#FF6F00' 
+							: y === 32 || y === 64 ? '#E65100' 
+							: y === 128 || y === 256 ? '#BF360C'
+							: y === 512 || y === 1024 ? '#5D4037'
+							: '#757575'}">
+						<span class="number">{{ y }}</span>
 					</div>
 				</td>
 			</tr>
@@ -34,16 +40,16 @@ export default {
 		move(event) {
 			switch(event.key) {
 				case 'ArrowUp':
-					board.move('up');
-					break;
-				case 'ArrowDown':
-					board.move('down');
-					break;
-				case 'ArrowLeft':
 					board.move('left');
 					break;
-				case 'ArrowRight':
+				case 'ArrowDown':
 					board.move('right');
+					break;
+				case 'ArrowLeft':
+					board.move('up');
+					break;
+				case 'ArrowRight':
+					board.move('down');
 					break;
 			}
 
@@ -65,17 +71,18 @@ export default {
 .grid {
 	width: 400px;
 	height: 400px;
-	background: #4527A0;
+	background: #263238;
 }
 
 .tile {
 	width: 40px;
 	height: 40px;
-	background: #B2EBF2;
+	background: #CFD8DC;
 }
 
 .tile-container {
-	background: #FFC107;
+	color: #fff;
+	font-weight: 600;
 	width: 75%;
 	height: 75%;
 	margin: 10%;
@@ -83,13 +90,12 @@ export default {
 }
 
 .number {
-	position: absolute;
-	left: 43%;
-	top: 38%;
+	line-height: 70px;
 }
 
 .line {
 	width: 100px;
+	height: 100px;
 }
 
 .begin-button {
