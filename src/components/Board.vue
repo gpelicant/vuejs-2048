@@ -1,13 +1,16 @@
 <template>
-	<table class="grid">
-		<tr class="tile" v-for="n in grid" :key="n">
-			<td v-for="index in n" :key="index"></td>
-		</tr>
-	</table>
+	<div class="board-container">
+		<table class="grid">
+			<tr class="tile" v-for="n in grid" :key="n">
+				<td v-for="index in n" :key="index"></td>
+			</tr>
+		</table>
+		<button type="submit" v-on:keyup="move">Commencer</button>
+	</div>
 </template>
 
 <script>
-import Board from '@/board/board';
+import board from '@/utils/board';
 
 export default {
 	name: 'Board',
@@ -20,8 +23,8 @@ export default {
 		}
 	},
 	created() {
-		Board.init(this.gridSize);
-		// this.grid = Board.squares;
+		board.init(this.gridSize);
+		// this.grid = board.squares;
 		for (var i = 0; i < this.line; i++) {
 			// debugger;
 			this.grid[i] = [];
@@ -29,6 +32,12 @@ export default {
 				this.grid[i][j] = i + j;
 				console.log(this.grid);
 			}
+		}
+		// console.log(this.grid);
+	},
+	methods: {
+		move(event) {
+			board.move(event.key);
 		}
 	}
 }
