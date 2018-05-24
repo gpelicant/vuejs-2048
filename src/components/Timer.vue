@@ -3,10 +3,15 @@
 // https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 export default {
 	name: 'Timer',
+	data() {
+		return {
+			interval: '',
+		}
+	},
 	methods: {
 		setTimer(minutes, seconds) {
 			let totalSeconds = 0;
-			setInterval(setTime, 1000);
+			this.interval = setInterval(setTime, 1000);
 
 			function setTime() {
 				++totalSeconds;
@@ -22,6 +27,9 @@ export default {
 				}
 			}
 		},
+		resetTimer() {
+			clearInterval(this.interval);
+		}
 	}
 }
 
