@@ -9,13 +9,17 @@
 				</td>
 			</tr>
 		</table>
+		<button class="begin-button" type="submit" @click="startTimer">Timer</button>
 		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
+		<span ref="minutes">00</span>:<span ref="seconds">00</span>
+		</timer>
 	</div>
 </template>
 
 <script>
 import board from '@/utils/board'
 import store from '@/utils/store'
+import timer from '@/components/Timer';
 
 export default {
 	name: 'Board',
@@ -23,7 +27,7 @@ export default {
 	data() {
 		return {
 			grid: [],
-			gridSize: 4,
+			gridSize: 4
 		}
 	},
 	created() {
@@ -31,19 +35,22 @@ export default {
 		this.grid = board.squares;
 	},
 	methods: {
+		startTimer() {
+			timer.methods.setTimer(this.$refs.minutes, this.$refs.seconds);
+		},
 		move(event) {
 			switch(event.key) {
 				case 'ArrowUp':
-					board.move('up');
-					break;
-				case 'ArrowDown':
-					board.move('down');
-					break;
-				case 'ArrowLeft':
 					board.move('left');
 					break;
-				case 'ArrowRight':
+				case 'ArrowDown':
 					board.move('right');
+					break;
+				case 'ArrowLeft':
+					board.move('up');
+					break;
+				case 'ArrowRight':
+					board.move('down');
 					break;
 			}
 
