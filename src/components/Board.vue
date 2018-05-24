@@ -3,16 +3,22 @@
 		<table class="grid">
 			<tr class="tile" v-for="(x, index) in grid" :key="index" :index="index">
 				<td class="line" v-for="(y, index) in x" :key="index" :index="index">
-					<div class="tile-container" v-if="y != 0">
-						<div class="number">{{ y }}</div>
+					<div class="tile-container" v-if="y != 0"
+						v-bind:style="{backgroundColor: y === 2 || y === 4 ? '#FFC107' 
+							: y === 8 || y === 16 ? '#FF6F00' 
+							: y === 32 || y === 64 ? '#E65100' 
+							: y === 128 || y === 256 ? '#BF360C'
+							: y === 512 || y === 1024 ? '#5D4037'
+							: '#757575'}">
+						<span class="number">{{ y }}</span>
 					</div>
 				</td>
 			</tr>
 		</table>
-		<button class="begin-button" type="submit" @click="startTimer">Timer</button>
-		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
+		<button class="timer-button" type="submit" @click="startTimer">Timer</button>
 		<span ref="minutes">00</span>:<span ref="seconds">00</span>
-		</timer>
+		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
+		<button class="refresh-button" type="submit" v-on:click="refresh">Reinitialiser</button>
 	</div>
 </template>
 
@@ -56,6 +62,10 @@ export default {
 
 			store.commit('setGrid', this.grid);
 			this.$forceUpdate()
+		},
+		refresh(){
+			board.init(this.gridSize);
+			this.grid = board.squares;
 		}
 	}
 }
@@ -72,17 +82,18 @@ export default {
 .grid {
 	width: 400px;
 	height: 400px;
-	background: #4527A0;
+	background: #263238;
 }
 
 .tile {
 	width: 40px;
 	height: 40px;
-	background: #B2EBF2;
+	background: #CFD8DC;
 }
 
 .tile-container {
-	background: #FFC107;
+	color: #fff;
+	font-weight: 600;
 	width: 75%;
 	height: 75%;
 	margin: 10%;
@@ -90,16 +101,15 @@ export default {
 }
 
 .number {
-	position: absolute;
-	left: 43%;
-	top: 38%;
+	line-height: 70px;
 }
 
 .line {
 	width: 100px;
+	height: 100px;
 }
 
-.begin-button {
+.begin-button, .refresh-button, .timer-button {
 	margin-top: 2%;
 	height: 40px;
 	width: 100px;
