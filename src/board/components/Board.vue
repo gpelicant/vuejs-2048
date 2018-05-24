@@ -1,9 +1,9 @@
 <template>
-	<div class="grid">
-		<div class="tile-container">
-			<div class="tile" v-for="n in grid.length" :key="n"></div>
-		</div>
-	</div>
+	<table class="grid">
+		<tr class="tile" v-for="n in grid" :key="n">
+			<td v-for="index in n" :key="index"></td>
+		</tr>
+	</table>
 </template>
 
 <script>
@@ -24,12 +24,12 @@ export default {
 		// this.grid = Board.squares;
 		for (var i = 0; i < this.line; i++) {
 			// debugger;
-			this.grid.push(new Array(this.line));
+			this.grid[i] = [];
 			for (var j = 0; j < this.line; j++) {
-				this.grid[i][j] = (i+j);
+				this.grid[i][j] = i + j;
+				console.log(this.grid);
 			}
 		}
-		console.log(this.grid);
 	}
 }
 
