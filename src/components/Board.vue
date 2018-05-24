@@ -1,8 +1,12 @@
 <template>
 	<div class="board-container">
 		<table class="grid">
-			<tr class="tile" v-for="(n, index) in grid" :key="index">
-				<td v-for="index in n" :key="index"></td>
+			<tr class="tile" v-for="(x, index) in grid" :key="index" :index="index">
+				<td class="line" v-for="(y,index) in x" :key="index" :index="index">
+					<div class="tile-container" v-if="y != 0">
+						<div class="number">{{y}}</div>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
@@ -18,23 +22,14 @@ export default {
 	data() {
 		return {
 			grid: [],
-			gridSize: 16,
-			line: 4 // also column
+			gridSize: 4,
 		}
 	},
 	created() {
 		board.init(this.gridSize);
-		this.initGrid();
+		this.grid = board.squares;
 	},
 	methods: {
-		initGrid() {
-			for (var i = 0; i < this.line; i++) {
-				this.grid[i] = [];
-				for (var j = 0; j < this.line; j++) {
-					this.grid[i][j] = i + j;
-				}
-			}
-		},
 		move(event) {
 			switch(event.key) {
 				case 'ArrowUp':
@@ -73,6 +68,24 @@ export default {
 	width: 40px;
 	height: 40px;
 	background: #B2EBF2;
+}
+
+.tile-container{
+	background: #FFC107;
+	width: 75%;
+	height: 75%;
+	margin: 10%;
+	position: relative;
+}
+
+.number{
+	position: absolute;
+	left: 43%;
+	top: 38%;
+}
+
+.line{
+	width: 100px;
 }
 
 .begin-button{
