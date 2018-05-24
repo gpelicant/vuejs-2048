@@ -19,7 +19,7 @@ import store from '@/utils/store'
 
 export default {
 	name: 'Board',
-	// components: 
+	computed: {},
 	data() {
 		return {
 			grid: [],
@@ -48,6 +48,7 @@ export default {
 			}
 
 			store.commit('setGrid', this.grid);
+			this.$forceUpdate()
 		}
 	}
 }
