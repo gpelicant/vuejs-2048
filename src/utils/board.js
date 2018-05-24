@@ -1,6 +1,6 @@
 class ExecutionStack {
   constructor (board) {
-    console.debug('ExecutionStack :: constructor')
+    // console.debug('ExecutionStack :: constructor')
     this.instructions = {'ADD': this.__add}
     this.stack = []
     this.board = board
@@ -29,7 +29,7 @@ class ExecutionStack {
 
 class Board {
   init (size) {
-    console.debug('Board :: init', size)
+    // console.debug('Board :: init', size)
     this.size = size
     this.squares = []
     this.hasMoved = false
@@ -46,7 +46,7 @@ class Board {
         }
       }
     }
-    console.debug('init', this.squares)
+    // console.debug(this.squares)
   }
   get (x, y) {
     return this.squares[x][y]
@@ -58,7 +58,7 @@ class Board {
     if (this.over) {
       return
     }
-    console.log('Board :: move', key)
+    console.debug('Board :: move', key)
     this.hasMoved = false
     let start = {x: 0, y: 0}
     let momentum = {x: 0, y: 0}
@@ -151,8 +151,8 @@ class Board {
   }
   addSquaresIfNeeded (x1, y1, x2, y2) {
     if (this.squares[x1][y1] === this.squares[x2][y2]) {
-      this.stack.push('ADD', x1, y1, x2, y2)
-      return true
+        this.stack.push('ADD', x1, y1, x2, y2)
+        return true
     }
     return false
   }
@@ -197,9 +197,7 @@ class Board {
           this.squares[x][y] = 0
           this.hasMoved = true
         } else {
-          if (this.addSquaresIfNeeded(x, y, x + 1, y)) {
-            x--
-          }
+          this.addSquaresIfNeeded(x, y, x + 1, y)
         }
         x++
       }

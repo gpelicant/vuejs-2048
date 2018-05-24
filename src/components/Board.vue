@@ -2,9 +2,9 @@
 	<div class="board-container">
 		<table class="grid">
 			<tr class="tile" v-for="(x, index) in grid" :key="index" :index="index">
-				<td class="line" v-for="(y,index) in x" :key="index" :index="index">
+				<td class="line" v-for="(y, index) in x" :key="index" :index="index">
 					<div class="tile-container" v-if="y != 0">
-						<div class="number">{{y}}</div>
+						<div class="number">{{ y }}</div>
 					</div>
 				</td>
 			</tr>
@@ -14,7 +14,8 @@
 </template>
 
 <script>
-import board from '@/utils/board';
+import board from '@/utils/board'
+import store from '@/utils/store'
 
 export default {
 	name: 'Board',
@@ -45,6 +46,8 @@ export default {
 					board.move('right');
 					break;
 			}
+
+			store.commit('setGrid', this.grid);
 		}
 	}
 }
@@ -53,7 +56,7 @@ export default {
 
 <style>
 
-.board-container{
+.board-container {
 	position: absolute;
 	left: 40%;
 }
@@ -70,7 +73,7 @@ export default {
 	background: #B2EBF2;
 }
 
-.tile-container{
+.tile-container {
 	background: #FFC107;
 	width: 75%;
 	height: 75%;
@@ -78,17 +81,17 @@ export default {
 	position: relative;
 }
 
-.number{
+.number {
 	position: absolute;
 	left: 43%;
 	top: 38%;
 }
 
-.line{
+.line {
 	width: 100px;
 }
 
-.begin-button{
+.begin-button {
 	margin-top: 2%;
 	height: 40px;
 	width: 100px;
@@ -99,7 +102,7 @@ export default {
 	font-weight: 600;
 	color: #676767;
 }
-.begin-button:hover{
+.begin-button:hover {
 	color: #4527A0;
 }
 
