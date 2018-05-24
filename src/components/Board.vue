@@ -3,11 +3,12 @@
 		<div class="tile-container">
 			<div class="tile" v-for="n in grid.length" :key="n"></div>
 		</div>
+	<button type="submit" v-on:keyup="move">Commencer</button>
 	</div>
 </template>
 
 <script>
-import Board from '@/utils/board';
+import board from '@/utils/board';
 
 export default {
 	name: 'Board',
@@ -20,8 +21,8 @@ export default {
 		}
 	},
 	created() {
-		Board.init(this.gridSize);
-		// this.grid = Board.squares;
+		board.init(this.gridSize);
+		// this.grid = board.squares;
 		for (var i = 0; i < this.line; i++) {
 			// debugger;
 			this.grid.push(new Array(this.line));
@@ -29,7 +30,12 @@ export default {
 				this.grid[i][j] = (i+j);
 			}
 		}
-		console.log(this.grid);
+		// console.log(this.grid);
+	},
+	methods: {
+		move(event) {
+			board.move(event.key);
+		}
 	}
 }
 
