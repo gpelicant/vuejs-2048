@@ -22,6 +22,7 @@
 				<span ref="minutes">00</span>:<span ref="seconds">00</span>
 			</button>
 			<button class="button" type="submit" v-on:click="refresh">Reinitialiser</button>
+			<router-link to="/scores" tag="button" class="button">Voir les scores</router-link>
 		</div>
 	</div>
 </template>
