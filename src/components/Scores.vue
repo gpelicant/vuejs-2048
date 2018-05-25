@@ -11,10 +11,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(score, index) in orderedScores" :key="index" :index="index">
-					<td>{{ score.nickname }}</td>
-					<td>{{ score.score }}</td>
-					<td>{{ score.time }}</td>
+				<tr class="line-score" v-for="(score, index) in orderedScores" :key="index" :index="index">
+					<td class="col-score">{{ score.nickname }}</td>
+					<td class="col-score">{{ score.score }}</td>
+					<td class="col-score">{{ score.time }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -64,5 +64,13 @@ export default {
 .score-table{
 	display: -webkit-inline-box;
 	border: 1px solid black;
+	overflow: auto;
+	max-width: 1250px;
+}
+
+.col-score{
+	max-width: 250px;
+	overflow: hidden;
+	padding: 10px;
 }
 </style>
