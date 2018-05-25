@@ -77,13 +77,14 @@ export default {
 			
 			this.over = board.over;
 			
-			if(this.over === true){
+			if(this.over === true) {
 				this.person = prompt("Entrez votre nom :", " ");
 				if(this.person === "" || this.person === " "){
 					this.person = "Unknow";
 				}
 
 				this.sendScore();
+				timer.methods.resetTimer(this.$refs.minutes, this.$refs.seconds);
 			}
 			
 			this.$forceUpdate()
