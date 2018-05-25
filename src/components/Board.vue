@@ -19,6 +19,8 @@
 		<span ref="minutes">00</span>:<span ref="seconds">00</span>
 		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
 		<button class="refresh-button" type="submit" v-on:click="refresh">Reinitialiser</button>
+		<br/>
+		<router-link to="/scores" tag="button" class="scores-button">Voir les scores</router-link>
 	</div>
 </template>
 
@@ -110,7 +112,7 @@ export default {
 	height: 100px;
 }
 
-.begin-button, .refresh-button, .timer-button {
+.begin-button, .refresh-button, .timer-button, .scores-button {
 	margin-top: 2%;
 	height: 40px;
 	width: 100px;
