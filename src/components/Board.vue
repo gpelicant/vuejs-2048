@@ -73,7 +73,7 @@ export default {
 		refresh(){
 			board.init(this.gridSize);
 			this.grid = board.squares;
-			timer.methods.resetTimer();
+			timer.methods.resetTimer(this.$refs.minutes, this.$refs.seconds);
 		}
 	}
 }
