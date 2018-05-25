@@ -27,8 +27,10 @@ export default {
 				}
 			}
 		},
-		resetTimer() {
+		resetTimer(minutes, seconds) {
 			clearInterval(this.interval);
+			minutes.innerHTML = "00";
+			seconds.innerHTML = "00";
 		}
 	}
 }

@@ -23,6 +23,7 @@
 				<span ref="minutes">00</span>:<span ref="seconds">00</span>
 			</button>
 			<button class="button" type="submit" v-on:click="refresh">Reinitialiser</button>
+			<router-link to="/scores" tag="button" class="button">Voir les scores</router-link>
 		</div>
 	</div>
 </template>
@@ -79,7 +80,7 @@ export default {
 		refresh(){
 			board.init(this.gridSize);
 			this.grid = board.squares;
-			timer.methods.resetTimer();
+			timer.methods.resetTimer(this.$refs.minutes, this.$refs.seconds);
 		}
 	}
 }
