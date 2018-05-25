@@ -31,7 +31,8 @@
 <script>
 import board from '@/utils/board'
 import store from '@/utils/store'
-import timer from '@/components/Timer';
+import http from '@/utils/http'
+import timer from '@/components/Timer'
 
 export default {
 	name: 'Grid',
@@ -81,6 +82,8 @@ export default {
 				if(this.person === "" || this.person === " "){
 					this.person = "Unknow";
 				}
+
+				this.sendScore();
 			}
 			
 			this.$forceUpdate()
@@ -90,6 +93,12 @@ export default {
 			this.over = false;
 			this.grid = board.squares;
 			timer.methods.resetTimer(this.$refs.minutes, this.$refs.seconds);
+		},
+		sendScore() {
+			http
+				.get(`${this.person}/${this.score}/${this.$refs.seconds.innerHTML}`)
+				.then(resp => console.log(resp))
+				.catch(err => console.log(err.request.response))
 		}
 	}
 }
