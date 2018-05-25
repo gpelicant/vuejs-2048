@@ -1,5 +1,6 @@
 <template>
 	<div class="board-container">
+		<span>Score : {{score}}</span>
 		<table class="grid">
 			<tr class="tile" v-for="(x, index) in grid" :key="index" :index="index">
 				<td class="line" v-for="(y, index) in x" :key="index" :index="index">
@@ -15,10 +16,13 @@
 				</td>
 			</tr>
 		</table>
-		<button class="timer-button" type="submit" @click="startTimer">Timer</button>
-		<span ref="minutes">00</span>:<span ref="seconds">00</span>
-		<button class="begin-button" type="submit" v-on:keyup="move">Commencer</button>
-		<button class="refresh-button" type="submit" v-on:click="refresh">Reinitialiser</button>
+		<div class="control-panel">
+			<button class="button" type="submit" v-on:keyup="move" @click="startTimer">
+				<span>Commencer</span>
+				<span ref="minutes">00</span>:<span ref="seconds">00</span>
+			</button>
+			<button class="button" type="submit" v-on:click="refresh">Reinitialiser</button>
+		</div>
 	</div>
 </template>
 
@@ -28,17 +32,19 @@ import store from '@/utils/store'
 import timer from '@/components/Timer';
 
 export default {
-	name: 'Board',
+	name: 'Grid',
 	computed: {},
 	data() {
 		return {
 			grid: [],
-			gridSize: 4
+			gridSize: 4,
+			score: 0,
 		}
 	},
 	created() {
 		board.init(this.gridSize);
 		this.grid = board.squares;
+		this.score = board.points;
 	},
 	methods: {
 		startTimer() {
@@ -61,6 +67,7 @@ export default {
 			}
 
 			store.commit('setGrid', this.grid);
+			this.score = board.points;
 			this.$forceUpdate()
 		},
 		refresh(){
@@ -110,10 +117,16 @@ export default {
 	height: 100px;
 }
 
-.begin-button, .refresh-button, .timer-button {
+.control-panel {
+	display: flex;
+	justify-content: center;
+}
+
+.button {
 	margin-top: 2%;
-	height: 40px;
+	margin-left: 5px;
 	width: 100px;
+	height: 40px;
 	background: #fff;
 	border: 1px solid #676767;
 	border-radius: 2px;

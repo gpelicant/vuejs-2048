@@ -8,7 +8,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Board',
+      name: 'Grid',
       component: Board
     }
   ]
