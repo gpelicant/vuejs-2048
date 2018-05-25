@@ -1,6 +1,7 @@
 <template>
 	<div class="board-container">
-		<span>Score : {{score}}</span>
+		<span class="score">Score : {{score}}</span>
+		<div class="over-container" v-if="over === true"><span class="over-message">Game over</span></div>
 		<table class="grid">
 			<tr class="tile" v-for="(x, index) in grid" :key="index" :index="index">
 				<td class="line" v-for="(y, index) in x" :key="index" :index="index">
@@ -39,12 +40,14 @@ export default {
 			grid: [],
 			gridSize: 4,
 			score: 0,
+			over: false,
 		}
 	},
 	created() {
 		board.init(this.gridSize);
 		this.grid = board.squares;
 		this.score = board.points;
+		this.over = board.over;
 	},
 	methods: {
 		startTimer() {
@@ -68,6 +71,9 @@ export default {
 
 			store.commit('setGrid', this.grid);
 			this.score = board.points;
+			
+			this.over = board.over;
+			console.log(this.over);
 			this.$forceUpdate()
 		},
 		refresh(){
@@ -108,6 +114,28 @@ export default {
 	position: relative;
 }
 
+.over-container{
+	width: 100%;
+    height: 418px;
+    position: absolute;
+    background: #BDBDBD;
+    z-index: 2;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+}
+
+.over-message{
+	position: relative;
+    top: 46%;
+    height: 20px;
+    padding: 10px 10px 5px;
+    background: #795548;
+    color: #fff;
+    border-radius: 4%;
+    border: 1px solid #212121;
+}
+
 .number {
 	line-height: 70px;
 }
@@ -115,6 +143,10 @@ export default {
 .line {
 	width: 100px;
 	height: 100px;
+}
+
+.score {
+	font-weight: 600;
 }
 
 .control-panel {
