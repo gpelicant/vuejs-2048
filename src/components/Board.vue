@@ -42,6 +42,7 @@ export default {
 			gridSize: 4,
 			score: 0,
 			over: false,
+			person: 'Unknow'
 		}
 	},
 	created() {
@@ -74,11 +75,19 @@ export default {
 			this.score = board.points;
 			
 			this.over = board.over;
-			console.log(this.over);
+			
+			if(this.over === true){
+				this.person = prompt("Entrez votre nom :", " ");
+				if(this.person === "" || this.person === " "){
+					this.person = "Unknow";
+				}
+			}
+			
 			this.$forceUpdate()
 		},
 		refresh(){
 			board.init(this.gridSize);
+			this.over = false;
 			this.grid = board.squares;
 			timer.methods.resetTimer(this.$refs.minutes, this.$refs.seconds);
 		}
@@ -124,6 +133,7 @@ export default {
     opacity: 0.9;
     display: flex;
     justify-content: center;
+	cursor: not-allowed;
 }
 
 .over-message{
@@ -167,7 +177,7 @@ export default {
 	font-weight: 600;
 	color: #676767;
 }
-.begin-button:hover {
+.button:hover {
 	color: #4527A0;
 }
 

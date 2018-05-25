@@ -58,7 +58,7 @@ class Board {
     if (this.over) {
       return
     }
-    console.debug('Board :: move', key)
+    // console.debug('Board :: move', key)
     this.hasMoved = false
     let start = {x: 0, y: 0}
     let momentum = {x: 0, y: 0}

@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<h4>Affichage des scores de l'API</h4>
-		<table>
+		<router-link to="/" tag="button" class="button back-button">Retour</router-link>
+		<table class="score-table">
 			<thead>
 				<tr>
 					<th>Pseudo</th>
@@ -45,6 +46,7 @@ export default {
 		this.loadScores()
 	},
 	computed: {
+		// need to fix the api, for prevent data with a wrong format
 		orderedScores: function() {
 			return _.orderBy(this.scores, 'score', 'desc')
 		}
@@ -52,3 +54,15 @@ export default {
 }
 
 </script>
+
+<style>
+.back-button{
+	position: absolute;
+	top: 10px;
+}
+
+.score-table{
+	display: -webkit-inline-box;
+	border: 1px solid black;
+}
+</style>
